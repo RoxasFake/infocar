@@ -3,7 +3,7 @@ import { CarrosEntity } from "src/dominio/entities/carros.entity";
 import { CarroRepository } from "src/infraestrutura/repositories/carro.repository";
 
 @Injectable()
-export  class AtualizaCarro {
+export  class AtualizaCarroUseCase {
     constructor(
         private readonly carroRepository: CarroRepository,
     ) {}

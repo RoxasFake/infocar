@@ -14,6 +14,5 @@ export  class DeletaCarroUseCase {
             throw new NotFoundException('Carro com o ID informado não existe.');
         }
         await this.carroRepository.deletaCarro(carro.id || '');
-        return;
     }
 }

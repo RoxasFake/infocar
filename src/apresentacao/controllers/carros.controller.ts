@@ -16,8 +16,8 @@ import { plainToInstance } from 'class-transformer';
 import { ListarCarrosUseCase } from 'src/aplicacao/use-cases/carros/listar-carros.use-case';
 import { BuscarCarroUseCase } from 'src/aplicacao/use-cases/carros/buscar-carro.use-case';
 import { CarrosEntity } from 'src/dominio/entities/carros.entity';
-import { DeletaCarroUseCase } from 'src/aplicacao/use-cases/carros/deleta-carro.use-case copy';
-import { AtualizaCarro } from 'src/aplicacao/use-cases/carros/atualiza-carro.use-case';
+import { DeletaCarroUseCase } from 'src/aplicacao/use-cases/carros/deleta-carro.use-case';
+import { AtualizaCarroUseCase } from 'src/aplicacao/use-cases/carros/atualiza-carro.use-case';
 
 @Controller('carros')
 export class CarrosController {
@@ -26,7 +26,7 @@ export class CarrosController {
     private readonly listarCarrosUseCase: ListarCarrosUseCase,
     private readonly buscarCarroUseCase: BuscarCarroUseCase,
     private readonly deletaCarroUseCase: DeletaCarroUseCase,
-    private readonly atualizaCarrosUseCase: AtualizaCarro,
+    private readonly atualizaCarrosUseCase: AtualizaCarroUseCase,
   ) {}
 
   @Post()
