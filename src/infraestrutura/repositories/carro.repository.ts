@@ -27,4 +27,13 @@ export class CarroRepository {
         return await this.carrosRepository.findOne({where: [{id}]});
     }
 
+    async deletaCarro(id:string): Promise<CarrosEntity | null> {
+        return await this.carrosRepository.delete({id}).then(result => {
+            if(result.affected && result.affected > 0) {
+                return {} as CarrosEntity;
+            }
+            return null;
+        });
+    }
+
 }

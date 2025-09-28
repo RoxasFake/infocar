@@ -16,6 +16,7 @@ import { plainToInstance } from 'class-transformer';
 import { ListarCarrosUseCase } from 'src/aplicacao/use-cases/carros/listar-carros.use-case';
 import { BuscarCarroUseCase } from 'src/aplicacao/use-cases/carros/buscar-carro.use-case';
 import { CarrosEntity } from 'src/dominio/entities/carros.entity';
+import { DeletaCarroUseCase } from 'src/aplicacao/use-cases/carros/deleta-carro.use-case copy';
 
 @Controller('carros')
 export class CarrosController {
@@ -23,6 +24,7 @@ export class CarrosController {
     private readonly criarCarroUseCase: CriarCarroUseCase,
     private readonly listarCarrosUseCase: ListarCarrosUseCase,
     private readonly buscarCarroUseCase: BuscarCarroUseCase,
+    private readonly deletaCarroUseCase: DeletaCarroUseCase,
   ) {}
 
   @Post()
@@ -70,8 +72,7 @@ export class CarrosController {
   @ApiBadRequestResponse({ description: 'ID do carro inválido.' })
   @ApiInternalServerErrorResponse({ description: 'Erro interno do servidor.' })
   @HttpCode(HttpStatus.NO_CONTENT)
-  deletaCarro(@Param() carroIdDtoRequest: CarroIdDtoRequest) {
-    console.log(carroIdDtoRequest);
-    return;
+  async deletaCarro(@Param() carroIdDtoRequest: CarroIdDtoRequest) {
+    return await this.deletaCarroUseCase.execute({id: carroIdDtoRequest.id});
   }
 }
