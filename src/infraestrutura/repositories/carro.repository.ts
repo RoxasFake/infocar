@@ -36,4 +36,16 @@ export class CarroRepository {
         });
     }
 
+    async atualizaCarro(carro: Partial<CarrosEntity>): Promise<void> {
+        await this.carrosRepository.update({id: carro.id}, {
+            placa: carro.placa,
+            chassi: carro.chassi,
+            renavam: carro.renavam,
+            modelo: carro.modelo,
+            marca: carro.marca,
+            ano: carro.ano,
+          });
+    }
+
 }
+

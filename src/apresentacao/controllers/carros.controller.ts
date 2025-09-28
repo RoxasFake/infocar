@@ -17,6 +17,7 @@ import { ListarCarrosUseCase } from 'src/aplicacao/use-cases/carros/listar-carro
 import { BuscarCarroUseCase } from 'src/aplicacao/use-cases/carros/buscar-carro.use-case';
 import { CarrosEntity } from 'src/dominio/entities/carros.entity';
 import { DeletaCarroUseCase } from 'src/aplicacao/use-cases/carros/deleta-carro.use-case copy';
+import { AtualizaCarro } from 'src/aplicacao/use-cases/carros/atualiza-carro.use-case';
 
 @Controller('carros')
 export class CarrosController {
@@ -25,6 +26,7 @@ export class CarrosController {
     private readonly listarCarrosUseCase: ListarCarrosUseCase,
     private readonly buscarCarroUseCase: BuscarCarroUseCase,
     private readonly deletaCarroUseCase: DeletaCarroUseCase,
+    private readonly atualizaCarrosUseCase: AtualizaCarro,
   ) {}
 
   @Post()
@@ -60,10 +62,11 @@ export class CarrosController {
   @ApiBadRequestResponse({ description: 'Dados inválidos.' })
   @ApiInternalServerErrorResponse({ description: 'Erro interno do servidor.' })
   @HttpCode(HttpStatus.NO_CONTENT)
-  update(@Param() carroIdDtoRequest: CarroIdDtoRequest, @Body() updateCarroDtoRequest :UpdateCarroDtoRequest ) {
-    console.log(carroIdDtoRequest, updateCarroDtoRequest);
-    return;
-    //return this.carrosService.update(id, updateCarDto);
+  async atualizaCarros(@Param() carroIdDtoRequest: CarroIdDtoRequest, @Body() updateCarroDtoRequest : UpdateCarroDtoRequest) : Promise<void> {
+    await this.atualizaCarrosUseCase.execute({
+      ...carroIdDtoRequest,
+      ...updateCarroDtoRequest,
+    });
   }
 
   //@HttpCode(HttpStatus.NO_CONTENT)
@@ -73,6 +76,6 @@ export class CarrosController {
   @ApiInternalServerErrorResponse({ description: 'Erro interno do servidor.' })
   @HttpCode(HttpStatus.NO_CONTENT)
   async deletaCarro(@Param() carroIdDtoRequest: CarroIdDtoRequest) {
-    return await this.deletaCarroUseCase.execute({id: carroIdDtoRequest.id});
+    return await this.deletaCarroUseCase.execute(carroIdDtoRequest);
   }
 }
