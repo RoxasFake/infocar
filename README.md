@@ -41,4 +41,7 @@ npx typeorm-ts-node-commonjs migration:run -d ./src/infraestrutura/migrations-da
 
 - Obs: 
     - O ideal para o projeto seria ter a Seed do banco de dados com padrões de modelos e marcas pre definidas no banco de dados para seleção do usuario ao realizar o cadastro, evitando duplicatas incoretas pelo fator de letras diferenciadas na criação de um carro
+
+    - Em desenvolvimento, por ser um teste, ao realizar o buscar carros não utilizei nenhum limite de paginação e nenhum tipo de filtro para buscar o carro, mas que em produção isso seria nescessario
+        - O ideal seria realizar a paginação utilizando a Data de criação como campo de ordenação, e utilizaria o itens por pagina mais o numero da pagina para calcular e retornar a quantidade de registros corretos para o cliente.
     

@@ -18,4 +18,9 @@ export class CarroRepository {
     async buscarCarroPorPlacaChassiRenavam( placa?:string, chassi?:string, renavam?:string): Promise<CarrosEntity | null> {
         return await this.carrosRepository.findOne({where: [ {placa}, {chassi}, {renavam} ]});
     }
+
+    async listarCarros(): Promise<CarrosEntity[]> {
+        return await this.carrosRepository.find({order: {createdAt: 'DESC'}});
+    }
+
 }

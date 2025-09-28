@@ -1,3 +1,4 @@
+import { Exclude, Expose } from 'class-transformer';
 import { IsString, IsInt, Min, Max, Length, IsUUID } from 'class-validator';
 
 export class CriarCarroDtoRequest {
@@ -31,9 +32,15 @@ export class CriarCarroDtoResponse {
   id: string;
 }
 
+@Exclude()
 export class CarrosDtoResponse {
+  @Expose()
   id: string;
+
+  @Expose()
   placa: string;
+
+  @Expose()
   modelo: string;
 }
 

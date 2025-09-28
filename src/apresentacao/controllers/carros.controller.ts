@@ -12,17 +12,22 @@ import {
 import { CarroDtoResponse, CarroIdDtoRequest, CarrosDtoResponse, CriarCarroDtoRequest, CriarCarroDtoResponse, UpdateCarroDtoRequest } from '../dtos/carros.dto';
 import { ApiBadRequestResponse, ApiConflictResponse, ApiInternalServerErrorResponse, ApiNotFoundResponse } from '@nestjs/swagger';
 import { CriarCarroUseCase } from 'src/aplicacao/use-cases/carros/criar-carro.use-case';
+import { plainToInstance } from 'class-transformer';
+import { ListarCarrosUseCase } from 'src/aplicacao/use-cases/carros/listar-carros.use-case';
 
 @Controller('carros')
 export class CarrosController {
-  constructor(private readonly criarCarroUseCase: CriarCarroUseCase) {}
+  constructor(
+    private readonly criarCarroUseCase: CriarCarroUseCase,
+    private readonly listarCarrosUseCase: ListarCarrosUseCase,
+  ) {}
 
   @Post()
   @ApiBadRequestResponse({ description: 'Dados inválidos.' })
   @ApiConflictResponse({ description: 'Carro com a mesma placa, chassi ou renavam já existe.' })
   @ApiInternalServerErrorResponse({ description: 'Erro interno do servidor.' })
   @HttpCode(HttpStatus.CREATED)
-  async create(@Body() criarCarroDto: CriarCarroDtoRequest): Promise<CriarCarroDtoResponse> {
+  async criarCarro(@Body() criarCarroDto: CriarCarroDtoRequest): Promise<CriarCarroDtoResponse> {
     const { id } = await this.criarCarroUseCase.execute(criarCarroDto);
     return { id };
   }
@@ -30,20 +35,10 @@ export class CarrosController {
   @Get()
   @ApiInternalServerErrorResponse({ description: 'Erro interno do servidor.' })
   @HttpCode(HttpStatus.OK)
-  findAll() :CarrosDtoResponse[] {
-    return  [{
-        id: '1',
-        placa: 'ABC1234',
-        modelo: 'Gol',
-      },  
-      {
-        id: '2',
-        placa: 'DEF5678',
-        modelo: 'Civic',
-      }
-    ];
-    //return `This action returns all carros. Query params: ${JSON.stringify(query)}`;
-    //return this.carrosService.findAll(query);
+  async listarCarros() :Promise<CarrosDtoResponse[]> {
+    const carros = await this.listarCarrosUseCase.execute();
+
+    return plainToInstance(CarrosDtoResponse, carros)
   }
 
   @Get(':id')
