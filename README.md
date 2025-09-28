@@ -24,11 +24,21 @@
 
 Para inciar o projeto execute:
 
+Comandos do Docker:
 docker compose up -d
+
+Comandos da Migration:
+
+npx typeorm-ts-node-commonjs migration:generate ./src/infraestrutura/migrations/NovaEntidadeCarro -d ./src/infraestrutura/migrations-data-source.ts
+npx typeorm-ts-node-commonjs migration:run -d ./src/infraestrutura/migrations-data-source.ts
 
 - Arquitetura do codigo
     - Clean Architecture 
     - Swagger
         -
     - Validadores
+    - Code First
+
+- Obs: 
+    - O ideal para o projeto seria ter a Seed do banco de dados com padrões de modelos e marcas pre definidas no banco de dados para seleção do usuario ao realizar o cadastro, evitando duplicatas incoretas pelo fator de letras diferenciadas na criação de um carro
     
