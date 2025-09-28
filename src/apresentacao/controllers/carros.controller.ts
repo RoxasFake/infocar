@@ -10,29 +10,26 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { CarroDtoResponse, CarroIdDtoRequest, CarrosDtoResponse, CriarCarroDtoRequest, CriarCarroDtoResponse, UpdateCarroDtoRequest } from '../dtos/carros.dto';
-import { ApiBadRequestResponse, ApiInternalServerErrorResponse, ApiNotFoundResponse } from '@nestjs/swagger';
-//import { CreateCarDto } from './dto/create-car.dto';
+import { ApiBadRequestResponse, ApiConflictResponse, ApiInternalServerErrorResponse, ApiNotFoundResponse } from '@nestjs/swagger';
+import { CriarCarroUseCase } from 'src/aplicacao/use-cases/carros/criar-carro.use-case';
 
 @Controller('carros')
 export class CarrosController {
-  //constructor(private readonly carrosService: CarrosService) {}
+  constructor(private readonly criarCarroUseCase: CriarCarroUseCase) {}
 
   @Post()
-  @ApiBadRequestResponse()
-  @ApiInternalServerErrorResponse()
+  @ApiBadRequestResponse({ description: 'Dados inválidos.' })
+  @ApiConflictResponse({ description: 'Carro com a mesma placa, chassi ou renavam já existe.' })
+  @ApiInternalServerErrorResponse({ description: 'Erro interno do servidor.' })
   @HttpCode(HttpStatus.CREATED)
-  create(@Body() criarCarroDto: CriarCarroDtoRequest): CriarCarroDtoResponse {
-
-    console.log(criarCarroDto.placa);
-    return  {
-      id: '1' 
-    };
-    //return this.carrosService.create(createCarDto);
+  async create(@Body() criarCarroDto: CriarCarroDtoRequest): Promise<CriarCarroDtoResponse> {
+    const { id } = await this.criarCarroUseCase.execute(criarCarroDto);
+    return { id };
   }
 
   @Get()
-  @ApiInternalServerErrorResponse()
-  @HttpCode(200)
+  @ApiInternalServerErrorResponse({ description: 'Erro interno do servidor.' })
+  @HttpCode(HttpStatus.OK)
   findAll() :CarrosDtoResponse[] {
     return  [{
         id: '1',
@@ -50,10 +47,10 @@ export class CarrosController {
   }
 
   @Get(':id')
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
-  @ApiInternalServerErrorResponse()
-  @HttpCode(200)
+  @ApiNotFoundResponse({ description: 'Carro não encontrado.' })
+  @ApiBadRequestResponse({ description: 'ID do carro inválido.' })
+  @ApiInternalServerErrorResponse({ description: 'Erro interno do servidor.' })
+  @HttpCode(HttpStatus.OK)
   findOne(@Param() carroIdDtoRequest: CarroIdDtoRequest) : CarroDtoResponse {
     console.log(carroIdDtoRequest);
     return  {
@@ -70,10 +67,10 @@ export class CarrosController {
   }
 
   @Patch(':id')
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
-  @ApiInternalServerErrorResponse()
-  @HttpCode(204)
+  @ApiNotFoundResponse({ description: 'Carro não encontrado.' })
+  @ApiBadRequestResponse({ description: 'Dados inválidos.' })
+  @ApiInternalServerErrorResponse({ description: 'Erro interno do servidor.' })
+  @HttpCode(HttpStatus.NO_CONTENT)
   update(@Param() carroIdDtoRequest: CarroIdDtoRequest, @Body() updateCarroDtoRequest :UpdateCarroDtoRequest ) {
     console.log(carroIdDtoRequest, updateCarroDtoRequest);
     return;
@@ -82,10 +79,10 @@ export class CarrosController {
 
   //@HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
-  @ApiNotFoundResponse()
-  @ApiBadRequestResponse()
-  @ApiInternalServerErrorResponse()
-  @HttpCode(204)
+  @ApiNotFoundResponse({ description: 'Carro não encontrado.' })
+  @ApiBadRequestResponse({ description: 'ID do carro inválido.' })
+  @ApiInternalServerErrorResponse({ description: 'Erro interno do servidor.' })
+  @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param() carroIdDtoRequest: CarroIdDtoRequest) {
     console.log(carroIdDtoRequest);
     return;

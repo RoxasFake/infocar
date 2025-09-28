@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CarrosEntity } from 'src/dominio/entities/carros.entity';
+import { CarroRepository } from './repositories/carro.repository';
 
 @Module({
   imports: [
@@ -23,9 +24,7 @@ import { CarrosEntity } from 'src/dominio/entities/carros.entity';
       }),
     TypeOrmModule.forFeature([CarrosEntity])
   ],
-  controllers: [],
-  providers: [],
-  exports: [],
+  providers: [CarroRepository],
+  exports: [CarroRepository],
 })
-
 export class InfraestruturaModule {}

@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { CarrosController } from './controllers/carros.controller';
+import { AplicacaoModule } from 'src/aplicacao/aplicacao.module';
 
 @Module({
-  imports: [],
+  imports: [AplicacaoModule],
   controllers: [CarrosController],
   providers: [],
   exports: [],
