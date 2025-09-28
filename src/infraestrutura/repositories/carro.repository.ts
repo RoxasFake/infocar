@@ -23,4 +23,8 @@ export class CarroRepository {
         return await this.carrosRepository.find({order: {createdAt: 'DESC'}});
     }
 
+    async buscarCarro(id:string): Promise<CarrosEntity | null> {
+        return await this.carrosRepository.findOne({where: [{id}]});
+    }
+
 }

@@ -44,14 +44,31 @@ export class CarrosDtoResponse {
   modelo: string;
 }
 
+@Exclude()
 export class CarroDtoResponse {
+  @Expose()
   id: string;
+  
+  @Expose()
   placa: string;
+
+  @Expose()
   modelo: string;
+
+  @Expose()
   marca: string;
+
+  @Expose()
   ano: number;
+
+  @Expose()
   chassi: string;
+
+  @Expose()
   renavam: string;
+
+  @Expose()
+  createdAt: Date;
 }
 
 export class UpdateCarroDtoRequest {

@@ -9,17 +9,20 @@ import {
   Delete,
   HttpStatus,
 } from '@nestjs/common';
-import { CarroDtoResponse, CarroIdDtoRequest, CarrosDtoResponse, CriarCarroDtoRequest, CriarCarroDtoResponse, UpdateCarroDtoRequest } from '../dtos/carros.dto';
+import { CarroIdDtoRequest, CarrosDtoResponse, CriarCarroDtoRequest, CriarCarroDtoResponse, UpdateCarroDtoRequest } from '../dtos/carros.dto';
 import { ApiBadRequestResponse, ApiConflictResponse, ApiInternalServerErrorResponse, ApiNotFoundResponse } from '@nestjs/swagger';
 import { CriarCarroUseCase } from 'src/aplicacao/use-cases/carros/criar-carro.use-case';
 import { plainToInstance } from 'class-transformer';
 import { ListarCarrosUseCase } from 'src/aplicacao/use-cases/carros/listar-carros.use-case';
+import { BuscarCarroUseCase } from 'src/aplicacao/use-cases/carros/buscar-carro.use-case';
+import { CarrosEntity } from 'src/dominio/entities/carros.entity';
 
 @Controller('carros')
 export class CarrosController {
   constructor(
     private readonly criarCarroUseCase: CriarCarroUseCase,
     private readonly listarCarrosUseCase: ListarCarrosUseCase,
+    private readonly buscarCarroUseCase: BuscarCarroUseCase,
   ) {}
 
   @Post()
@@ -46,19 +49,8 @@ export class CarrosController {
   @ApiBadRequestResponse({ description: 'ID do carro inválido.' })
   @ApiInternalServerErrorResponse({ description: 'Erro interno do servidor.' })
   @HttpCode(HttpStatus.OK)
-  findOne(@Param() carroIdDtoRequest: CarroIdDtoRequest) : CarroDtoResponse {
-    console.log(carroIdDtoRequest);
-    return  {
-      id: '1',
-      placa: 'ABC1234',
-      modelo: 'Gol',
-      marca: 'Volkswagen',
-      ano: 2020,
-      chassi: '9BWZZZ377VT004251',
-      renavam: '12345678901',
-    };
-    //return `This action returns a #${id} carro`;
-    //return this.carrosService.findOne(id);
+  async buscarCarro(@Param() carroIdDtoRequest: CarroIdDtoRequest) : Promise<CarrosEntity> {
+    return await this.buscarCarroUseCase.execute({id: carroIdDtoRequest.id});
   }
 
   @Patch(':id')
@@ -78,9 +70,8 @@ export class CarrosController {
   @ApiBadRequestResponse({ description: 'ID do carro inválido.' })
   @ApiInternalServerErrorResponse({ description: 'Erro interno do servidor.' })
   @HttpCode(HttpStatus.NO_CONTENT)
-  remove(@Param() carroIdDtoRequest: CarroIdDtoRequest) {
+  deletaCarro(@Param() carroIdDtoRequest: CarroIdDtoRequest) {
     console.log(carroIdDtoRequest);
     return;
-    //return this.carrosService.remove(id);
   }
 }

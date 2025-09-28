@@ -44,4 +44,10 @@ npx typeorm-ts-node-commonjs migration:run -d ./src/infraestrutura/migrations-da
 
     - Em desenvolvimento, por ser um teste, ao realizar o buscar carros não utilizei nenhum limite de paginação e nenhum tipo de filtro para buscar o carro, mas que em produção isso seria nescessario
         - O ideal seria realizar a paginação utilizando a Data de criação como campo de ordenação, e utilizaria o itens por pagina mais o numero da pagina para calcular e retornar a quantidade de registros corretos para o cliente.
-    
+
+    - Em produção ideal seria ter criado uma autenticação para validar os acesso dos usuarios, porem como estamos em um teste e o foco e o crud esse ponto foi ignorado, a forma correta de autenticação seria utilizando o middleware do nest para isso 
+
+
+Continuar a implementação dos use case e repositorios, implementar os testes unitarios em jest, criar a comunicação por mensagem utilizando o Brooken, organização do Readme, finalizando com a implementação do projeto rodando dentro do docker, rodar as migrations assim que o projeto foi iniciado.
+
+Resalva que cada ponto do use case e das demais implementações seja feita em comites diferentes
