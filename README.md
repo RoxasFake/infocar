@@ -1,37 +1,58 @@
-- Setup do projeto
+🚗 Projeto CRUD de Carros
 
-Para inciar o projeto execute os comandos abaixo para criar e configurar o ambiente:
+Este projeto é um exemplo de CRUD utilizando NestJS, com arquitetura limpa, documentação automática via Swagger, e integração com banco de dados usando TypeORM.
 
-Comandos do Docker:
+🛠️ Setup do Projeto
 
-docker compose up -dnpm 
+Para iniciar o projeto, siga os passos abaixo para criar e configurar o ambiente.
 
-Comandos da Migration:
+1️⃣ Subir os containers com Docker
+docker compose up -d
 
+2️⃣ Gerar e rodar as migrations
+# Gerar uma nova migration
 npx typeorm-ts-node-commonjs migration:generate ./src/infraestrutura/migrations/NovaEntidadeCarro -d ./src/infraestrutura/migrations-data-source.ts
 
+# Executar as migrations
 npx typeorm-ts-node-commonjs migration:run -d ./src/infraestrutura/migrations-data-source.ts
 
-Comandos para startar o ambiente:
-
+3️⃣ Rodar os testes e iniciar o servidor
 npm run test
-
 npm start
 
-Acesse o http://localhost:3000/swagger, onde sera possivel realizar as ações do projeto e verificar a documentação gerada pelo Swagger.
 
-- Arquitetura do codigo
-    - Clean Architecture 
-    - Swagger
-    - Validadores
-    - Code First
+Após o start, acesse: http://localhost:3000/swagger
 
-- Obs: 
-    - O ideal para o projeto seria ter a Seed do banco de dados com padrões de modelos e marcas pre definidas no banco de dados para seleção do usuario ao realizar o cadastro, evitando duplicatas incoretas pelo fator de letras diferenciadas na criação de um carro
+para interagir com a API e visualizar a documentação.
 
-    - Em desenvolvimento, por ser um teste, ao realizar o buscar carros não utilizei nenhum limite de paginação e nenhum tipo de filtro para buscar o carro, mas que em produção isso seria nescessario
-        - O ideal seria realizar a paginação utilizando a Data de criação como campo de ordenação, e utilizaria o itens por pagina mais o numero da pagina para calcular e retornar a quantidade de registros corretos para o cliente.
+🏗️ Arquitetura do Código
 
-    - Em produção ideal seria ter criado uma autenticação para validar os acesso dos usuarios, porem como estamos em um teste e o foco e o crud esse ponto foi ignorado, a forma correta de autenticação seria utilizando o middleware do nest para isso 
+O projeto segue os seguintes princípios e padrões:
 
-    - Por se tratar de um teste foi realizado um delete objetivo e mais simples, porem o em um ambiente de produção o ideal seria um soft delete, para manter a rastreabilidade dos dados.
+🧼 Clean Architecture
+
+📜 Swagger para documentação da API
+
+✅ Validadores para garantir a integridade dos dados
+
+🛠 Code First com TypeORM
+
+📌 Observações Importantes
+
+Seed do Banco de Dados
+O ideal seria incluir seeds com modelos e marcas pré-definidas para evitar duplicação causada por diferenças de grafia ao cadastrar carros.
+
+Paginação & Filtros
+Atualmente, a listagem de carros não possui paginação ou filtros.
+Em produção, o ideal seria:
+
+Paginação baseada na data de criação como campo de ordenação
+
+Controle de itens por página + número da página
+
+Autenticação
+Em um ambiente real, deveria existir autenticação para validar o acesso dos usuários (middleware do NestJS).
+Como o foco é o CRUD, esse ponto foi ignorado.
+
+Soft Delete
+No teste foi implementado um delete simples, mas em produção o recomendado seria soft delete para manter a rastreabilidade dos dados.
