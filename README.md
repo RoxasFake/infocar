@@ -80,11 +80,17 @@ npx typeorm-ts-node-commonjs migration:run -d ./src/infraestrutura/migrations-da
 Rode os testes e inicie o servidor
 
 bash
+
 Copiar código
+
 npm run test
+
 npm start
+
 Acesse a UI do Swagger
+
 Visite: http://localhost:3000/swagger
+
 Lá você poderá ver e testar todos os endpoints.
 
 📡 Uso / Endpoints
