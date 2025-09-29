@@ -1,6 +1,6 @@
 - Setup do projeto
 
-Para inciar o projeto execute:
+Para inciar o projeto execute os comandos abaixo para criar e configurar o ambiente:
 
 Comandos do Docker:
 docker compose up -dnpm 
