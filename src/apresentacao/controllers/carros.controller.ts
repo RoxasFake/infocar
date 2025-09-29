@@ -76,6 +76,6 @@ export class CarrosController {
   @ApiInternalServerErrorResponse({ description: 'Erro interno do servidor.' })
   @HttpCode(HttpStatus.NO_CONTENT)
   async deletaCarro(@Param() carroIdDtoRequest: CarroIdDtoRequest) {
-    return await this.deletaCarroUseCase.execute(carroIdDtoRequest);
+    return await this.deletaCarroUseCase.deletaCarro(carroIdDtoRequest);
   }
 }

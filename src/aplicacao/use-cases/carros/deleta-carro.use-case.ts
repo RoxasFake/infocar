@@ -8,7 +8,7 @@ export  class DeletaCarroUseCase {
         private readonly carroRepository: CarroRepository,
     ) {}
     
-    async execute(carro:Partial<CarrosEntity>): Promise<void> {
+    async deletaCarro(carro:Partial<CarrosEntity>): Promise<void> {
         const carroExistente = await this.carroRepository.buscarCarro(carro.id || '');
         if(!carroExistente) {
             throw new NotFoundException('Carro com o ID informado não existe.');
