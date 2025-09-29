@@ -59,29 +59,24 @@ O projeto adota princípios de **Clean Architecture**, com separação entre cam
 
 Clone este repositório
 
-bash
-Copiar código
+
 git clone https://github.com/RoxasFake/infocar.git
 cd infocar
 Suba os containers com Docker
 
-bash
-Copiar código
+
 docker compose up -d
 Gere e execute as migrations
 
-bash
-Copiar código
+
 # Gerar nova migration
 npx typeorm-ts-node-commonjs migration:generate ./src/infraestrutura/migrations/NovaEntidadeCarro -d ./src/infraestrutura/migrations-data-source.ts
 
 # Executar migrations
 npx typeorm-ts-node-commonjs migration:run -d ./src/infraestrutura/migrations-data-source.ts
-Rode os testes e inicie o servidor
 
-bash
 
-Copiar código
+# Rode os testes e inicie o servidor
 
 npm run test
 
@@ -93,7 +88,7 @@ Visite: http://localhost:3000/swagger
 
 Lá você poderá ver e testar todos os endpoints.
 
-📡 Uso / Endpoints
+# 📡 Uso / Endpoints
 No Swagger você verá todas as rotas disponíveis, por exemplo:
 
 POST /carros — criar um carro
@@ -108,24 +103,25 @@ DELETE /carros/:id — excluir carro
 
 (O Swagger disponibiliza os schemаs de request / response, exemplos e testes interativos.)
 
-🔧 Melhorias Futuras
-Seed de dados (marcas e modelos padrão) para evitar duplicidades
+# 🔧 Melhorias Futuras
 
-Paginação e filtros nas rotas de listagem
+-Seed de dados (marcas e modelos padrão) para evitar duplicidades
 
-Autenticação / autorização (JWT, roles, middlewares)
+- Paginação e filtros nas rotas de listagem
 
-Soft delete em vez de delete permanente
+- Autenticação / autorização (JWT, roles, middlewares)
 
-Logs / auditoria
+- Soft delete em vez de delete permanente
 
-Tratamento de erros refinado e mensagens padronizadas
+- Logs / auditoria
 
-Testes de integração mais completos
+- Tratamento de erros refinado e mensagens padronizadas
 
-CI/CD (GitHub Actions, pipelines, etc.)
+- Testes de integração mais completos
 
-📝 Observações
+- CI/CD (GitHub Actions, pipelines, etc.)
+
+# 📝 Observações
 O projeto foi desenvolvido como teste, logo algumas funcionalidades consideradas “essenciais” em produção — como autenticação e paginação — ficaram de fora para focar no CRUD básico.
 
 O delete implementado é direto; idealmente em ambiente real se usaria soft delete para manter histórico.
