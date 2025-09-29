@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Test } from '@nestjs/testing';
 import { CarrosEntity } from 'src/dominio/entities/carros.entity';
 import { CriarCarroUseCase } from './criar-carro.use-case';
@@ -118,7 +120,7 @@ describe('CriarCarroUseCase', () => {
                         marca: 'Marca Y',
                         ano: 2020,
                     })
-                } catch (error) {}                
+                } catch (error) { /* empty */ }                
 
                 expect(carroRepository.persistirCarro).not.toHaveBeenCalled();
             });
