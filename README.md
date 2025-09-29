@@ -6,15 +6,14 @@ Projeto de requisitos (teste) para Infosistemas — API CRUD de carros com **Nes
 
 ## 📌 Sumário
 
-- [Sobre](#sobre)  
-- [Tecnologias](#tecnologias)  
-- [Funcionalidades](#funcionalidades)  
-- [Arquitetura](#arquitetura)  
-- [Instalação & Setup](#instalação--setup)  
-- [Uso / Endpoints](#uso--endpoints)  
-- [Melhorias Futuras](#melhorias-futuras)  
-- [Observações](#observações)  
-- [Licença](#licença)  
+#sobre
+#tecnologias
+#funcionalidades
+#arquitetura
+#instalação--setup
+#uso--endpoints
+#melhorias-futuras
+#observações
 
 ---
 
@@ -61,11 +60,13 @@ Clone este repositório
 
 
 git clone https://github.com/RoxasFake/infocar.git
+
 cd infocar
+
 Suba os containers com Docker
 
-
 docker compose up -d
+
 Gere e execute as migrations
 
 
