@@ -63,7 +63,7 @@ export class CarrosController {
   @ApiInternalServerErrorResponse({ description: 'Erro interno do servidor.' })
   @HttpCode(HttpStatus.NO_CONTENT)
   async atualizaCarros(@Param() carroIdDtoRequest: CarroIdDtoRequest, @Body() updateCarroDtoRequest : UpdateCarroDtoRequest) : Promise<void> {
-    await this.atualizaCarrosUseCase.execute({
+    await this.atualizaCarrosUseCase.atualizaCarro({
       ...carroIdDtoRequest,
       ...updateCarroDtoRequest,
     });

@@ -29,12 +29,12 @@ describe('DeletaCarroUseCase', () => {
         describe('Quando o delete encontrar o carro', () => {
             it('Encontrou carro por id para deletar', async () => {
                 carroRepository.buscarCarro = jest.fn().mockResolvedValue('ac24619c-511d-4575-844a-379decb49cf9');
-                await deletaCarroUseCase.execute({id:'ac24619c-511d-4575-844a-379decb49cf9'});
+                await deletaCarroUseCase.deletaCarro({id:'ac24619c-511d-4575-844a-379decb49cf9'});
                 expect(carroRepository.buscarCarro).toHaveBeenCalledWith('ac24619c-511d-4575-844a-379decb49cf9');
             });
             it('Realizou a ação de deletar', async () => {
                 carroRepository.deletaCarro = jest.fn().mockResolvedValue('ac24619c-511d-4575-844a-379decb49cf9');
-                await deletaCarroUseCase.execute({id:'ac24619c-511d-4575-844a-379decb49cf9'});
+                await deletaCarroUseCase.deletaCarro({id:'ac24619c-511d-4575-844a-379decb49cf9'});
                 expect(carroRepository.deletaCarro).toHaveBeenCalledWith('ac24619c-511d-4575-844a-379decb49cf9');
             });
         });
