@@ -2,20 +2,6 @@
 
 Projeto de requisitos (teste) para Infosistemas — API CRUD de carros com **NestJS**, **TypeORM** e **Clean Architecture**.
 
----
-
-## 📌 Sumário
-
-#sobre
-#tecnologias
-#funcionalidades
-#arquitetura
-#instalação--setup
-#uso--endpoints
-#melhorias-futuras
-#observações
-
----
 
 ## 🧐 Sobre
 
