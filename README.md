@@ -3,16 +3,19 @@
 Para inciar o projeto execute os comandos abaixo para criar e configurar o ambiente:
 
 Comandos do Docker:
+
 docker compose up -dnpm 
 
 Comandos da Migration:
 
 npx typeorm-ts-node-commonjs migration:generate ./src/infraestrutura/migrations/NovaEntidadeCarro -d ./src/infraestrutura/migrations-data-source.ts
+
 npx typeorm-ts-node-commonjs migration:run -d ./src/infraestrutura/migrations-data-source.ts
 
 Comandos para startar o ambiente:
 
 npm run test
+
 npm start
 
 Acesse o http://localhost:3000/, onde sera possivel realizar as ações do projeto e verificar a documentação gerada pelo Swagger.
