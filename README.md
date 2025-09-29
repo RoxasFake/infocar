@@ -57,18 +57,6 @@ O projeto adota princípios de **Clean Architecture**, com separação entre cam
 - **Repositories / Infra** — acesso a dados via TypeORM  
 - **Entity / Models / DTOs** — definição de entidades e validações  
 
-### 🗺️ Fluxo do CRUD
-
-```mermaid
-flowchart TD
-  U[Usuário / Cliente] --> C[Controller]
-  C --> S[Service / Use Case]
-  S --> R[Repository / Infra]
-  R --> DB[(Banco de Dados)]
-  DB --> R --> S --> C --> U
-🚀 Instalação & Setup
-Siga estes passos para rodar o projeto localmente:
-
 Clone este repositório
 
 bash
