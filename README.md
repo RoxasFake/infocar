@@ -1,58 +1,139 @@
-🚗 Projeto CRUD de Carros
+# 🏁 Infocar
 
-Este projeto é um exemplo de CRUD utilizando NestJS, com arquitetura limpa, documentação automática via Swagger, e integração com banco de dados usando TypeORM.
+Projeto de requisitos (teste) para Infosistemas — API CRUD de carros com **NestJS**, **TypeORM** e **Clean Architecture**.
 
-🛠️ Setup do Projeto
+---
 
-Para iniciar o projeto, siga os passos abaixo para criar e configurar o ambiente.
+## 📌 Sumário
 
-1️⃣ Subir os containers com Docker
+- [Sobre](#sobre)  
+- [Tecnologias](#tecnologias)  
+- [Funcionalidades](#funcionalidades)  
+- [Arquitetura](#arquitetura)  
+- [Instalação & Setup](#instalação--setup)  
+- [Uso / Endpoints](#uso--endpoints)  
+- [Melhorias Futuras](#melhorias-futuras)  
+- [Observações](#observações)  
+- [Licença](#licença)  
+
+---
+
+## 🧐 Sobre
+
+Este projeto foi criado como parte de um teste para a empresa Infosistemas.  
+O objetivo é construir uma API para gerenciar **carros** (modelos, marcas, operações de CRUD), com validações, documentação e boas práticas arquiteturais.
+
+---
+
+## 🛠 Tecnologias
+
+Aqui estão as principais tecnologias e ferramentas utilizadas:
+
+- **NestJS**
+- **TypeScript**
+- **TypeORM** (com abordagem *Code First*)
+- **Swagger** para documentação automática da API
+- **Docker / Docker Compose**
+- **DTOs e Validadores** para integridade dos dados
+- **Clean Architecture** para separação de responsabilidades
+
+---
+
+## ✅ Funcionalidades
+
+- Criar / ler / atualizar / deletar (CRUD) registros de carros  
+- Documentação de API via Swagger  
+- Validações nos dados de entrada  
+- Migrações com TypeORM  
+
+---
+
+## 🏛 Arquitetura
+
+O projeto adota princípios de **Clean Architecture**, com separação entre camadas:
+
+- **Controller / Routes** — recebimento e resposta HTTP  
+- **Service / Use Cases** — lógica de negócio  
+- **Repositories / Infra** — acesso a dados via TypeORM  
+- **Entity / Models / DTOs** — definição de entidades e validações  
+
+### 🗺️ Fluxo do CRUD
+
+```mermaid
+flowchart TD
+  U[Usuário / Cliente] --> C[Controller]
+  C --> S[Service / Use Case]
+  S --> R[Repository / Infra]
+  R --> DB[(Banco de Dados)]
+  DB --> R --> S --> C --> U
+🚀 Instalação & Setup
+Siga estes passos para rodar o projeto localmente:
+
+Clone este repositório
+
+bash
+Copiar código
+git clone https://github.com/RoxasFake/infocar.git
+cd infocar
+Suba os containers com Docker
+
+bash
+Copiar código
 docker compose up -d
+Gere e execute as migrations
 
-2️⃣ Gerar e rodar as migrations
-# Gerar uma nova migration
+bash
+Copiar código
+# Gerar nova migration
 npx typeorm-ts-node-commonjs migration:generate ./src/infraestrutura/migrations/NovaEntidadeCarro -d ./src/infraestrutura/migrations-data-source.ts
 
-# Executar as migrations
+# Executar migrations
 npx typeorm-ts-node-commonjs migration:run -d ./src/infraestrutura/migrations-data-source.ts
+Rode os testes e inicie o servidor
 
-3️⃣ Rodar os testes e iniciar o servidor
+bash
+Copiar código
 npm run test
 npm start
+Acesse a UI do Swagger
+Visite: http://localhost:3000/swagger
+Lá você poderá ver e testar todos os endpoints.
 
+📡 Uso / Endpoints
+No Swagger você verá todas as rotas disponíveis, por exemplo:
 
-Após o start, acesse: http://localhost:3000/swagger
+POST /carros — criar um carro
 
-para interagir com a API e visualizar a documentação.
+GET /carros — listar carros
 
-🏗️ Arquitetura do Código
+GET /carros/:id — obter um carro por id
 
-O projeto segue os seguintes princípios e padrões:
+PUT /carros/:id — atualizar carro
 
-🧼 Clean Architecture
+DELETE /carros/:id — excluir carro
 
-📜 Swagger para documentação da API
+(O Swagger disponibiliza os schemаs de request / response, exemplos e testes interativos.)
 
-✅ Validadores para garantir a integridade dos dados
+🔧 Melhorias Futuras
+Seed de dados (marcas e modelos padrão) para evitar duplicidades
 
-🛠 Code First com TypeORM
+Paginação e filtros nas rotas de listagem
 
-📌 Observações Importantes
+Autenticação / autorização (JWT, roles, middlewares)
 
-Seed do Banco de Dados
-O ideal seria incluir seeds com modelos e marcas pré-definidas para evitar duplicação causada por diferenças de grafia ao cadastrar carros.
+Soft delete em vez de delete permanente
 
-Paginação & Filtros
-Atualmente, a listagem de carros não possui paginação ou filtros.
-Em produção, o ideal seria:
+Logs / auditoria
 
-Paginação baseada na data de criação como campo de ordenação
+Tratamento de erros refinado e mensagens padronizadas
 
-Controle de itens por página + número da página
+Testes de integração mais completos
 
-Autenticação
-Em um ambiente real, deveria existir autenticação para validar o acesso dos usuários (middleware do NestJS).
-Como o foco é o CRUD, esse ponto foi ignorado.
+CI/CD (GitHub Actions, pipelines, etc.)
 
-Soft Delete
-No teste foi implementado um delete simples, mas em produção o recomendado seria soft delete para manter a rastreabilidade dos dados.
+📝 Observações
+O projeto foi desenvolvido como teste, logo algumas funcionalidades consideradas “essenciais” em produção — como autenticação e paginação — ficaram de fora para focar no CRUD básico.
+
+O delete implementado é direto; idealmente em ambiente real se usaria soft delete para manter histórico.
+
+Ao buscar todos os carros, não há filtros ou paginação no momento.
