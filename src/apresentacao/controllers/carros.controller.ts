@@ -62,14 +62,13 @@ export class CarrosController {
   @ApiBadRequestResponse({ description: 'Dados inválidos.' })
   @ApiInternalServerErrorResponse({ description: 'Erro interno do servidor.' })
   @HttpCode(HttpStatus.NO_CONTENT)
-  async atualizaCarros(@Param() carroIdDtoRequest: CarroIdDtoRequest, @Body() updateCarroDtoRequest : UpdateCarroDtoRequest) : Promise<void> {
+  async atualizaCarro(@Param() carroIdDtoRequest: CarroIdDtoRequest, @Body() updateCarroDtoRequest : UpdateCarroDtoRequest) : Promise<void> {
     await this.atualizaCarrosUseCase.atualizaCarro({
       ...carroIdDtoRequest,
       ...updateCarroDtoRequest,
     });
   }
 
-  //@HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
   @ApiNotFoundResponse({ description: 'Carro não encontrado.' })
   @ApiBadRequestResponse({ description: 'ID do carro inválido.' })
