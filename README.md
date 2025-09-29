@@ -3,7 +3,7 @@
 Para inciar o projeto execute:
 
 Comandos do Docker:
-docker compose up -d
+docker compose up -dnpm 
 
 Comandos da Migration:
 
@@ -14,6 +14,8 @@ Comandos para startar o ambiente:
 
 npm run test
 npm start
+
+Acesse o http://localhost:3000/, onde sera possivel realizar as ações do projeto e verificar a documentação gerada pelo Swagger.
 
 - Arquitetura do codigo
     - Clean Architecture 

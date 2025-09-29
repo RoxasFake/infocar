@@ -8,7 +8,7 @@ export  class ListarCarrosUseCase {
         private readonly carroRepository: CarroRepository,
     ) {}
     
-    async execute(): Promise<CarrosEntity[]> {
+    async listarCarros(): Promise<CarrosEntity[]> {
         return await this.carroRepository.listarCarros();
     }
 }

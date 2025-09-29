@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/unbound-method */
 import { Test } from '@nestjs/testing';
 import { CarrosEntity } from 'src/dominio/entities/carros.entity';
@@ -51,7 +50,7 @@ describe('BuscarCarroUseCase', () => {
             it('exceção de conflito será lançada', async () => {
                 await expect(buscarCarroUseCase.execute({
                     id:'ac24619c-511d-4575-844a-379decb49cf9',
-                })).rejects.toThrow(new NotFoundException ('Carro com id informado não existe.'));
+                })).rejects.toThrow(new NotFoundException ('Carro com o ID informado não existe.'));
             });
         });
     });

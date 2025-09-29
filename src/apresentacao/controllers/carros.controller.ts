@@ -43,7 +43,7 @@ export class CarrosController {
   @ApiInternalServerErrorResponse({ description: 'Erro interno do servidor.' })
   @HttpCode(HttpStatus.OK)
   async listarCarros() :Promise<CarrosDtoResponse[]> {
-    const carros = await this.listarCarrosUseCase.execute();
+    const carros = await this.listarCarrosUseCase.listarCarros();
 
     return plainToInstance(CarrosDtoResponse, carros)
   }
